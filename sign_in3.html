@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<!-- Week 6 Programming Lab "sign_in3.html"
+	         Date - 10/11/20 
+	    By: Patrick "PJ" Sheldon -->
+
+	    <!-- I used this layout from week 2 and week 3 programming lab -->
+<head>
+	<title>Log on and registration Page</title>                <!-- page title -->
+	<link rel="stylesheet" type="text/css" href="style.css">   <!-- style sheet -->
+</head>
+<body>
+	<div class="Login page">
+	<div class="form">                
+		<form class="register-form">                                                             <!-- Register side of the log in -->
+		<input type="text" id="firstName" placeholder="First Name"/>                             <!-- Fist Name input field -->
+		<input type="text" id="lastName" placeholder="Last Name"/>                               <!-- Last Name input Field -->
+		<input type="text" id="address" placeholder="Street Address"/>                           <!-- Address input field -->
+		<input type="text" id="city" style="width: 175px;" placeholder="City"/>                  <!-- City input field -->
+		<input type="text" id="state" style="width: 75px;" placeholder="State"/>                 <!-- State input field -->
+		<input type="text" id="zip" style="width: 100px;" placeholder="Zip Code"/>               <!-- zip code input field -->
+		<input type="text" id="email" placeholder="E-Mail Address Ex: username@domain.com"/>     <!-- email input field -->
+		<input type="text" id="phone" pattern="^\((\d{3})\)(\d{3})[- ](\d{4})$" placeholder="Phone Number Ex: (xxx)xxx-xxxx"/> <!-- Phone input field -->
+		<input type="text" id="username" placeholder="Please enter username between 4 and 20 characters"> <!-- Usernme input field -->
+		<label for="password">Password should be between 4 and 12 characters, contain at least one digit, contain at least one uppercase character, one lowercase character, and one these special characters (! # $ *).</label>                           <!-- Label to give the priameters of the password -->
+		<input type="password" id="passed" pattern="^(?=.*\d)(?=.*[!#$*])(?=.*[a-z])(?=.*[A-Z]).{4,12}$" placeholder="Enter a password" > <!-- Password input field -->
+		<button onclick="validate()">Register </button>                                          <!-- button on the registration form -->
+		<p class="message">Already Registered? <a href="#">Login</a></p>                         <!-- link to the sign in "page" -->
+		</form>
+		<script type="text/javascript" src="js/click.js"></script>                               <!-- coding script for the login form -->
+		<form class="Login form">                                                                <!-- Log in form side -->
+		<input type="text" name="first name" placeholder="User Name"/>                           <!-- username field input -->
+		<input type="password" name="password" placeholder="password"/>                          <!-- password field input -->
+		<button onclick="oops()">Login</button>                                                  <!-- sign in button -->
+		<p class="message">Not Registered? <a href="#">Register</a></p>                          <!-- link to the register side -->
+		</form>
+	</div>	
+	</div>
+	<script type="text/javascript">
+		function validate() {
+			var phoneNum = document.getElementById("phone").value; // value for phone input
+
+			var regex = /^\((\d{3})\)(\d{3})[- ](\d{4})$/;         // regular expression for (xxx)xxx-xxxx
+
+			if(regex.test(phoneNum)) {                             // if statement that test the regex to the value 
+				usernameValidate();                                         // if true then will coninue the rest of the alert
+			}
+			else {
+				window.alert("Please enter a 10 didgit number with () e.g. (xxx)xxx-xxxx"); // if False
+			}
+		}
+	</script>
+	<script type="text/javascript">
+
+		function usernameValidate() {
+			var userNamer = document.getElementById("username").value;                                // variable of the username field
+
+			var illegalChars = /\w/;                                                                  // variable of the regex parameters
+
+			if (userNamer == "") {                                                                    // if no username entered
+				error = window.alert("Please enter a Username!");
+			}
+
+			else if ((userNamer.length < 4) || (userNamer.length > 20)) {                             // if user name is too few or too much characters
+				error = window.alert("Username should be between 4 and 20 characters");
+			}
+
+			else if (!illegalChars.test(userNamer)) {
+				error = window.alert("Please enter a valid username. Letter and/or numbers only"); // if the username fits in the regex parameter
+			}
+
+			else {
+				error = passwordValidate();       // this the continueing to the next validation for passwords.
+			}
+
+			return error;                         // depending on which variable was true.
+		}
+	</script>
+	<script type="text/javascript">
+
+		function passwordValidate() {
+			var passe = document.getElementById("passed").value;                        // variable for the passwrod field
+
+			var passRegex = /^(?=.*\d)(?=.*[!#$*])(?=.*[a-z])(?=.*[A-Z]).{4,12}$/;      // The regex variable for checking the password to validate
+
+			if (passRegex.test(passe)) {                                                // if the password passes the constraints then it moves to the next function
+				clicker();
+			}
+			else {                                                                      // when the password does not meet the constraints
+				window.alert("Error!!\nPassword should be between 4 and 12 characters, contain at least one digit, contain at least one uppercase character, one lowercase character, and one these special characters (! # $ ? *)");
+			}
+		}
+	</script>
+	<script>
+		function clicker() {
+	
+			var firstName = document.getElementById('firstName').value;    // value for fistname input
+			var lastName = document.getElementById('lastName').value;      // value for lastname input
+			var address = document.getElementById('address').value;        // value for address input
+			var city = document.getElementById('city').value;              // value for city input
+			var state = document.getElementById('state').value;            // value for state input
+			var zip = document.getElementById('zip').value;                // value for zip input
+			var email = document.getElementById('email').value;            // value for email input
+			var phone = document.getElementById('phone').value;            // value for phone input
+			var user = document.getElementById('username').value;          // value for username input
+
+			/* This the alert that the person will get that reads back all of their information */
+			window.alert("Hello, " + firstName + " " + lastName + "!\nYour address is: \n" + address + "\n" + city + 
+				" " + state + ", " + zip + "\nE-Mail: " + email + "\nPhone: " + phone + "\nusername is : " + user + "\n password is: ********\nThanks for Playing!");
+
+			document.getElementById('firstName').value = "";    // value for fistname input to clear
+			document.getElementById('lastName').value = "";     // value for lastname input to clear
+			document.getElementById('address').value = "";      // value for address input to clear
+			document.getElementById('city').value = "";         // value for city input to clear
+			document.getElementById('state').value = "";        // value for state input to clear
+			document.getElementById('zip').value = "";          // value for zip input to clear
+			document.getElementById('email').value = "";        // value for email input to clear
+			document.getElementById('phone').value = "";        // value for phone input to clear
+			document.getElementById('username').value = "";     // value for username input to clear
+			document.getElementById('passed').value = "";       // value for password input to clear
+		}
+	</script>
+
+	<script>
+		/* This incase someone tries to sign in befor regersting. the assignment is asking to register first */
+		function oops() {
+
+			window.alert("The assignment is to Register.\nPlease click on register after you close this box.\nThanks!")
+
+		}
+	</script>
+	<!-- The javaquery for the transtion between boxes used in the video -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
+
+	<script>
+		/* this is to switch between register and sign in */
+		$('.message a').click(function(){
+		$('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+		});
+	</script>
+
+
+</body>
+</html>
